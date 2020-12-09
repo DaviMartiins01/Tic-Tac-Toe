@@ -25,7 +25,15 @@ int main()
 
     }while(loop == 0);
 
+
+    if(turn == 1)
+      turn = 2;
+    else
+      turn = 1;
+
     Draw();
+    printf("\n\t   Player %i Won!!!", turn);
+    printf("\n\tThank you for playing!\n");
     return 0;
 }
 
