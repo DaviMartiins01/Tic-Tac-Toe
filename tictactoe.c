@@ -44,10 +44,10 @@ void PrintValue()
     {
          for(int e = 0; e < 3; e++)
          {
-            if(coordinates[i][e] != 'X' && coordinates[i][e] != 'O')
-            {
-                coordinates[i][e] = ' ';
-            }
+              if(coordinates[i][e] != 'X' && coordinates[i][e] != 'O')
+              {
+                  coordinates[i][e] = ' ';
+              }
          }
     }
 }
@@ -62,8 +62,11 @@ void GetAnswer()
         printf("Type the collum \n>>> ");
         scanf("%i", &collum);
 
-        coordinates[line][collum] = 'X';
-        turn = 2;
+        if(coordinates[line][collum] != 'O' && line < 3 && collum < 3)
+        {
+            coordinates[line][collum] = 'X';
+            turn = 2;
+        }
     }
     else
     {
@@ -73,8 +76,11 @@ void GetAnswer()
         printf("Type the collum \n>>> ");
         scanf("%i", &collum);
 
-        coordinates[line][collum] = 'O';
-        turn = 1;
+        if(coordinates[line][collum] != 'X' && line < 3 && collum < 3)
+        {
+            coordinates[line][collum] = 'O';
+            turn = 1;
+        }
     }
 
 }
