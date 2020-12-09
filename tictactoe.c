@@ -4,12 +4,14 @@
 void Draw(void);
 void PrintValue();
 void GetAnswer();
+void CheckAnswer();
 
 char coordinates[3][3];
 
 int turn = 1;
 int collum;
 int line;
+int loop = 0;
 
 int main()
 {
@@ -18,10 +20,12 @@ int main()
         PrintValue();
         Draw();
         GetAnswer();
+        CheckAnswer();
         system("cls");
 
-    }while(turn == turn);
+    }while(loop == 0);
 
+    Draw();
     return 0;
 }
 
@@ -62,7 +66,7 @@ void GetAnswer()
         printf("Type the collum \n>>> ");
         scanf("%i", &collum);
 
-        if(coordinates[line][collum] != 'O' && line < 3 && collum < 3)
+        if(coordinates[line][collum] != 'O' && line < 3 && collum < 3 && coordinates[line][collum] != 'X')
         {
             coordinates[line][collum] = 'X';
             turn = 2;
@@ -76,11 +80,38 @@ void GetAnswer()
         printf("Type the collum \n>>> ");
         scanf("%i", &collum);
 
-        if(coordinates[line][collum] != 'X' && line < 3 && collum < 3)
+        if(coordinates[line][collum] != 'X' && line < 3 && collum < 3 && coordinates[line][collum] != 'O')
         {
             coordinates[line][collum] = 'O';
             turn = 1;
         }
     }
+}
 
+void CheckAnswer()
+{
+     for(int i = 0; i < 3; i++)
+     {
+          if(coordinates[0+i][0] == 'X' && coordinates[0+i][1] == 'X' && coordinates[0+i][2] == 'X' || coordinates[0+i][0] == 'O' && coordinates[0+i][1] == 'O' && coordinates[0+i][2] == 'O')
+          {
+              loop = 1;
+          }
+
+          if(coordinates[0][0+i] == 'X' && coordinates[1][0+i] == 'X' && coordinates[2][0+i] == 'X' || coordinates[0][0+i] == 'O' && coordinates[1][0+i] == 'O' && coordinates[2][0+i] == 'O')
+          {
+              loop = 1;
+          }
+
+          if(coordinates[0][0] == 'X' && coordinates[1][1] == 'X' && coordinates[2][2] == 'X' || coordinates[0][0] == 'O' && coordinates[1][1] == 'O' && coordinates[2][2] == 'O')
+          {
+              loop = 1;
+              break;
+          }
+
+          if(coordinates[2][0] == 'X' && coordinates[1][1] == 'X' && coordinates[0][2] == 'X' || coordinates[2][0] == 'O' && coordinates[1][1] == 'O' && coordinates[0][2] == 'O')
+          {
+              loop = 1;
+              break;
+          }
+     }
 }
